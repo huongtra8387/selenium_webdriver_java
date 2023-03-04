@@ -1,5 +1,6 @@
 package webdriver;
 
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebDriver;
@@ -24,12 +25,11 @@ public class Topic_00_Template {
 		driver = new FirefoxDriver();
 		driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 		driver.manage().window().maximize();
-		driver.get("https://www.facebook.com/");
 	}
 
 	@Test
 	public void TC_01_ID() {
-		
+		driver.get("");
 		
 	}
 
@@ -42,7 +42,21 @@ public class Topic_00_Template {
 	public void TC_03_LoginFormDisplayed() {
 
 	}
-
+	
+	public void sleepInSecond(long timeInSecond) {
+		try {
+			Thread.sleep(timeInSecond * 1000);
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public int getRandomNumber() {
+		Random rand = new Random();
+		return rand.nextInt(9999);
+	}
+	
 	@AfterClass
 	public void afterClass() {
 		driver.quit();
