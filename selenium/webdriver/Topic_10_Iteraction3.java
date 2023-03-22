@@ -3,6 +3,7 @@ package webdriver;
 import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
+import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -16,6 +17,7 @@ import org.testng.annotations.Test;
 public class Topic_10_Iteraction3 {
 	WebDriver driver;
 	Actions action;
+	Alert alert;
 	JavascriptExecutor jsExecutor;
 	String projectPath = System.getProperty("user.dir");
 	String osName = System.getProperty("os.name");
@@ -35,7 +37,7 @@ public class Topic_10_Iteraction3 {
 		driver.manage().window().maximize();
 	}
 
-	@Test
+	//@Test
 	public void TC_01_DoubleClick() {
 		driver.get("https://automationfc.github.io/basic-form/index.html");
 		//scroll xuong den cho co nut "Double click me"
@@ -49,7 +51,17 @@ public class Topic_10_Iteraction3 {
 
 	@Test
 	public void TC_02_ValidatePageTitle() {
-		
+		driver.get("http://swisnl.github.io/jQuery-contextMenu/demo.html");
+		action.contextClick(driver.findElement(By.cssSelector("span.context-menu-one"))).perform();
+		sleepInSecond(3);
+		Assert.assertTrue(driver.findElement(By.cssSelector("li.context-menu-icon-quit")).isDisplayed());
+		action.moveToElement(driver.findElement(By.cssSelector("li.context-menu-icon-quit"))).perform();
+		sleepInSecond(3);
+		Assert.assertTrue(driver.findElement(By.cssSelector("li.context-menu-icon-quit.context-menu-visible")).isDisplayed());
+		driver.findElement(By.cssSelector("li.context-menu-icon-quit.context-menu-visible")).click();
+		sleepInSecond(3);
+		driver.switchTo().alert().accept();
+		Assert.assertFalse(driver.findElement(By.cssSelector("li.context-menu-icon-quit")).isDisplayed());
 	}
 
 	@Test
@@ -73,7 +85,7 @@ public class Topic_10_Iteraction3 {
 	
 	@AfterClass
 	public void afterClass() {
-		driver.quit();
+		//driver.quit();
 	}
 	
 }
