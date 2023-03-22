@@ -44,9 +44,10 @@ public class Topic_08_Default_Dropdown {
 
 	@Test
 	public void TC_01_Register_New_Account() {
-		driver.get("https://demo.nopcommerce.com/register");
+		driver.get("https://demo.nopcommerce.com/");
 		sleepInSecond(3);
 		
+		driver.findElement(By.cssSelector("a.ico-register")).click();
 		driver.findElement(By.cssSelector("#gender-female")).click();
 		driver.findElement(By.cssSelector("#FirstName")).sendKeys(firstName);
 		driver.findElement(By.cssSelector("#LastName")).sendKeys(lastName);
@@ -64,7 +65,12 @@ public class Topic_08_Default_Dropdown {
 		
 		Assert.assertEquals(driver.findElement(By.xpath("//div[@class='result']")).getText(), "Your registration completed");
 		
-		driver.findElement(By.cssSelector("a.ico-account")).click();
+		driver.findElement(By.xpath("//a[text()='My account']")).click();
+		sleepInSecond(3);
+		
+		driver.findElement(By.cssSelector(".email")).sendKeys(emailAddress);
+		driver.findElement(By.cssSelector(".password")).sendKeys(passWord);
+		driver.findElement(By.cssSelector(".login-button")).click();
 		sleepInSecond(3);
 		
 		Assert.assertEquals(new Select(driver.findElement(By.name("DateOfBirthDay"))).getFirstSelectedOption().getText(), day);
